@@ -5,7 +5,11 @@ import lejos.hardware.sensor.EV3IRSensor;
 import lejos.hardware.sensor.SensorMode;
 import lejos.robotics.RegulatedMotor;
 import lejos.utility.Delay;
-
+/**
+ * 
+ * @author Teo
+ *
+ */
 public class BeaconF extends Thread {
 
 	private RegulatedMotor motor1;
@@ -90,13 +94,13 @@ public class BeaconF extends Thread {
 		}
 	}
 	// Lowers the lift and delays the robot for 3 seconds
-	public void lowerS() {
+	private void lowerS() {
 		motor3.rotate(-100);
 		Delay.msDelay(3000);
 
 	}
 	// Stops all motors
-	public void stopMo() {
+	private void stopMo() {
 		motor1.startSynchronization();
 		motor1.stop(true);
 		motor2.stop(true);
@@ -105,17 +109,18 @@ public class BeaconF extends Thread {
 	//
 	// All methods below control the motors of the robot
 	//
-	public void defaultSpeed() {
+	private void defaultSpeed() {
 		motor1.setSpeed(900);
 		motor2.setSpeed(900);
 	}
 
-	public void turnSpeed() {
+	private void turnSpeed() {
 		motor1.setSpeed(850);
 		motor2.setSpeed(800);
 	}
 
-	public void backwards() {
+	@SuppressWarnings("unused")
+	private void backwards() {
 		LCD.drawString("peruutus2", 6, 6);
 		motor1.startSynchronization();
 		motor1.forward();
@@ -123,7 +128,8 @@ public class BeaconF extends Thread {
 		motor1.endSynchronization();
 	}
 
-	public void forwards() {
+	@SuppressWarnings("unused")
+	private void forwards() {
 
 		motor1.startSynchronization();
 		motor1.backward();
@@ -131,14 +137,14 @@ public class BeaconF extends Thread {
 		motor1.endSynchronization();
 	}
 
-	public void turnRight() {
+	private void turnRight() {
 		motor1.startSynchronization();
 		motor1.backward();
 		motor2.stop();
 		motor1.endSynchronization();
 	}
 
-	public void turnLeft() {
+	private void turnLeft() {
 		motor1.startSynchronization();
 		motor2.backward();
 		motor1.stop();

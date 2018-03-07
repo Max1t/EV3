@@ -9,7 +9,11 @@ import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.robotics.RegulatedMotor;
 import lejos.utility.Delay;
-
+/**
+ * 
+ * @author Max
+ *
+ */
 public class Main {
 	// Main
 	public static void main(String[] args) {

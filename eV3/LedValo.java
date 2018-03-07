@@ -1,7 +1,11 @@
 package eV3;
 
 import lejos.hardware.Button;
-
+/**
+ * 
+ * @author Ida
+ *
+ */
 public class LedValo {
 	//Robot LED light controls
 	

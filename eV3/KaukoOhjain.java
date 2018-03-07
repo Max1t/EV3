@@ -3,18 +3,22 @@ package eV3;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.robotics.RegulatedMotor;
 import lejos.utility.Delay;
-
+/**
+ * 
+ * @author Max
+ *
+ */
 public class KaukoOhjain extends Thread {
-	
+
 	private EV3IRSensor infraredSensor;
 	private EV3IRSensor infraredSensor2;
 	private RegulatedMotor mB;
 	private RegulatedMotor mC;
 	private RegulatedMotor mA;
-	BeaconF beacon;
+	private BeaconF beacon;
 	private LedValo valo;
 
-	boolean jatka = true;
+	boolean jatka = true;	
 	//Constructor uses 2 IR sensors, 2 Large motors, 1 medium motor. Other IR sensor is passed to BeaconF
 	public KaukoOhjain(EV3IRSensor sensor2, EV3IRSensor sensor, RegulatedMotor b, RegulatedMotor c, RegulatedMotor a) {
 		this.infraredSensor = sensor;
