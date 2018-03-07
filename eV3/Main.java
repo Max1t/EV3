@@ -18,11 +18,11 @@ public class Main {
 	// Main
 	public static void main(String[] args) {
 		// Creating sensor and motors.
-		EV3IRSensor irSensor = new EV3IRSensor(SensorPort.S3);
-		EV3IRSensor irSensor2 = new EV3IRSensor(SensorPort.S4);
-		RegulatedMotor mB = new EV3LargeRegulatedMotor(MotorPort.B);
-		RegulatedMotor mC = new EV3LargeRegulatedMotor(MotorPort.C);
-		RegulatedMotor mA = new EV3MediumRegulatedMotor(MotorPort.A);
+		EV3IRSensor remoteIR = new EV3IRSensor(SensorPort.S3);
+		EV3IRSensor beaconIR = new EV3IRSensor(SensorPort.S4);
+		RegulatedMotor leftMotor = new EV3LargeRegulatedMotor(MotorPort.B);
+		RegulatedMotor rightMotor = new EV3LargeRegulatedMotor(MotorPort.C);
+		RegulatedMotor liftMotor = new EV3MediumRegulatedMotor(MotorPort.A);
 		LedValo valo = new LedValo();
 		
 		//Startup LED Sequence
@@ -33,7 +33,7 @@ public class Main {
 		valo.setGreen();
 		
 		//Create objects to be able to start and stop both threads
-		KaukoOhjain KO = new KaukoOhjain(irSensor, irSensor2, mB, mC, mA);
+		KaukoOhjain KO = new KaukoOhjain(remoteIR, beaconIR, leftMotor, rightMotor, liftMotor);
 		BeaconF KA =new BeaconF();
 		
 		Delay.msDelay(3000);

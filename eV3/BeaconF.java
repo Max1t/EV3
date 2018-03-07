@@ -12,20 +12,20 @@ import lejos.utility.Delay;
  */
 public class BeaconF extends Thread {
 
-	private RegulatedMotor Rightmotor;
-	private RegulatedMotor Leftmotor;
-	private RegulatedMotor Liftmotor;
-	private EV3IRSensor s1;
+	private RegulatedMotor rightmotor;
+	private RegulatedMotor leftmotor;
+	private RegulatedMotor liftmotor;
+	private EV3IRSensor beaconIR;
 	boolean jatkaB = true;
 	boolean etsi = false;
 	private LedValo valo;
 	// Main constructor, requires 2 large motors, 1 medium motor, 1 IR Sensor
 	public BeaconF(RegulatedMotor mB, RegulatedMotor mC, RegulatedMotor mA, EV3IRSensor s) {
-		this.Rightmotor = mB;
-		this.Leftmotor = mC;
-		this.Liftmotor = mA;
-		this.s1 = s;
-		this.Rightmotor.synchronizeWith(new RegulatedMotor[] { this.Leftmotor });
+		this.rightmotor = mB;
+		this.leftmotor = mC;
+		this.liftmotor = mA;
+		this.beaconIR = s;
+		this.rightmotor.synchronizeWith(new RegulatedMotor[] { this.leftmotor });
 		valo = new LedValo();
 	}
 	// Constructor without parameters for main class
@@ -46,7 +46,7 @@ public class BeaconF extends Thread {
 	}
 	// Run when [BeaconF].start() is called
 	public void run() {
-		SensorMode seek = s1.getSeekMode(); // Sets the IR sensor to seekmode
+		SensorMode seek = beaconIR.getSeekMode(); // Sets the IR sensor to seekmode
 		float[] sample = new float[seek.sampleSize()];
 		int x = 0;
 		while (jatkaB) {
@@ -77,8 +77,8 @@ public class BeaconF extends Thread {
 					lowerS();
 					LCD.drawString("peruutus1", 1, 1);
 					defaultSpeed();
-					Rightmotor.forward();
-					Leftmotor.forward();
+					rightmotor.forward();
+					leftmotor.forward();
 					//backwards();
 					Delay.msDelay(2000);
 					LCD.drawString("peruutus3", 7, 7);
@@ -95,60 +95,60 @@ public class BeaconF extends Thread {
 	}
 	// Lowers the lift and delays the robot for 3 seconds
 	private void lowerS() {
-		Liftmotor.rotate(-240);
+		liftmotor.rotate(-100);
 		Delay.msDelay(3000);
 
 	}
 	// Stops all motors
 	private void stopMo() {
-		Rightmotor.startSynchronization();
-		Rightmotor.stop(true);
-		Leftmotor.stop(true);
-		Rightmotor.endSynchronization();
+		rightmotor.startSynchronization();
+		rightmotor.stop(true);
+		leftmotor.stop(true);
+		rightmotor.endSynchronization();
 	}
 	//
 	// All methods below control the motors of the robot
 	//
 	private void defaultSpeed() {
-		Rightmotor.setSpeed(900);
-		Leftmotor.setSpeed(900);
+		rightmotor.setSpeed(900);
+		leftmotor.setSpeed(900);
 	}
 
 	private void turnSpeed() {
-		Rightmotor.setSpeed(850);
-		Leftmotor.setSpeed(800);
+		rightmotor.setSpeed(850);
+		leftmotor.setSpeed(800);
 	}
 
 	@SuppressWarnings("unused")
 	private void backwards() {
 		LCD.drawString("peruutus2", 6, 6);
-		Rightmotor.startSynchronization();
-		Rightmotor.forward();
-		Leftmotor.forward();
-		Rightmotor.endSynchronization();
+		rightmotor.startSynchronization();
+		rightmotor.forward();
+		leftmotor.forward();
+		rightmotor.endSynchronization();
 	}
 
 	@SuppressWarnings("unused")
 	private void forwards() {
 
-		Rightmotor.startSynchronization();
-		Rightmotor.backward();
-		Leftmotor.backward();
-		Rightmotor.endSynchronization();
+		rightmotor.startSynchronization();
+		rightmotor.backward();
+		leftmotor.backward();
+		rightmotor.endSynchronization();
 	}
 
 	private void turnRight() {
-		Rightmotor.startSynchronization();
-		Rightmotor.backward();
-		Leftmotor.stop();
-		Rightmotor.endSynchronization();
+		rightmotor.startSynchronization();
+		rightmotor.backward();
+		leftmotor.stop();
+		rightmotor.endSynchronization();
 	}
 
 	private void turnLeft() {
-		Rightmotor.startSynchronization();
-		Leftmotor.backward();
-		Rightmotor.stop();
-		Rightmotor.endSynchronization();
+		rightmotor.startSynchronization();
+		leftmotor.backward();
+		rightmotor.stop();
+		rightmotor.endSynchronization();
 
 	}
 }
